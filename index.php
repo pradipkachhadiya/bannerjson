@@ -1,210 +1,210 @@
 <html>  
     <head>  
         <title>Content</title>  
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css"> 
+        <style>
+           @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+            *{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+
+            body{
+                min-height: 100vh;
+                padding: 40px 0;
+                background-color: #ecedef;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .card{
+                background-color: #fff;
+                padding: 30px;
+                max-width: 375px;
+                width: 100%;
+                border-radius: 20px;
+            }
+
+            .card h2{
+                font-size: 27px;
+                margin-bottom: 40px;
+            }
+
+            .inputs{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+            }
+
+            .inputs label{
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+
+            .inputs input{
+                display: block;
+                padding: 10px;
+                font-size: 16px;
+                border-radius: 7px;
+                border: 1px solid #464277;
+                background-color: #f4f8fb;
+                outline: none;
+            }
+
+            .text-right{
+                font-size: 16px;
+                text-align: right;
+                display: block;
+                color: #212121;
+                margin-bottom: 20px;
+            }
+
+            .btn-login{
+                display: block;
+                width: 100%;
+                height: 40px;
+                background-color: #212121;
+                color: #fff;
+                text-decoration: none;
+                text-align: center;
+                line-height: 40px;
+                border-radius: 7px;
+                margin-bottom: 20px;
+                transition: 0.3s;
+            }
+
+            .btn-login:hover{
+                transform: translateY(-5px);
+                box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+            }
+
+            .text{
+                display: block;
+                text-align: center;
+                color: #888;
+                margin-bottom: 20px;
+            }
+
+            .text-long{
+                color: #212121;
+                margin-bottom: 20px;
+            }
+
+            .social-icons{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            .social-icons a{
+                height: 50px;
+                width: 50px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                transition: 0.3s;
+            }
+
+            .social-icons a:hover{
+                border-radius: 50%;
+                transform: translateY(-5px);
+                box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            }
+
+            .social-icons .google{
+                background: #feecea;
+                color: #9d4843;
+            }
+            .social-icons .twitter{
+                background: #ecf4ff;
+                color: #34a8f1;
+            }
+            .social-icons .facebook{
+                background: #edf1fa;
+                color: #5e83b0;
+            }
+            .social-icons .apple{
+                background: #e9e9e9;
+                color: #000;
+            }
+
+            .social-icons a i{
+                font-size: 20px;
+            }
+
+            @keyframes big {
+                from {
+                    transform: scale(0.7);
+                }
+                
+                to {
+                    transform: scale(1);
+                }
+            }
+        </style>
     </head>  
     <body>  
-    <div class="container">
-    <div class="row">
-    <div id="messages"></div>
-
-    <h2> Content List </h2>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal">
-    Add
-    </button>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Link</th>
-                <th>Banner</th>
-                <th>Qr Code</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody id="live_data">
-            
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="contentModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="contentModalLabel">Add Content</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    
-                    <form id="addUpdateContent" method="post" enctype="multipart">
-                        <div class="modal-body">       
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" id="description" placeholder="Enter Description" name="description" required></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="link">Link</label>
-                                <input type="text" class="form-control" id="link" placeholder="Enter Link" name="link">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="banner">Upload Banner</label>
-                                <input type="file" class="form-control" id="banner" name="banner">
-                                <div class="prview_img">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="qr_code">Qr Code</label>
-                                <input type="text" class="form-control" id="qr_code" placeholder="Enter Qr Code" name="qr_code">
-                            </div>
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <input type="hidden" class="form-control" id="id" name="id">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
+    
+    
+        <div class="card">
+            <h2>Login</h2>
+            <div id="messages"></div>
+            <form id="submitLogin" method="post" enctype="multipart">
+                <div class="inputs">
+                    <label>Email</label>
+                    <input type="email" name="email" id="email" required>
                 </div>
-            </div>
+                <div class="inputs">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <!-- <a target="_blank" href="https://youtu.be/xo9W8WQ-QVI" class="text-right">Did you forget your password?</a> -->
+                <input type="hidden" name="flag" value="1">
+                <button class="btn-login">Log In</button>
+            </form>
         </div>
-    </div>
-
- 
-</div>
-  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script>  
-$(document).ready(function(){  
-
-    $(document).on('change', '#banner', function() {
-        imagesPreview(this, '.prview_img');
-    });
-
-    var imagesPreview = function(input, placeToInsertImagePreview) {
-
-        if (input.files) {
-            var filesAmount = input.files.length;
-            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.jfif|\.webp)$/i;
-
-            if(!allowedExtensions.exec(input.value)){
-                iziToast.error({
-                title: 'Error!',
-                message: 'Please upload file having extensions .jpeg/.jpg/.png only.',
-                position: 'topRight'
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>  
+            $(document).ready(function(){  
+                $(document).on('submit', '#submitLogin', function (e) {
+                    e.preventDefault();
+                    
+                    var formdata = new FormData($("#submitLogin")[0]);
+                    $('.loader').show();
+                    $.ajax({
+                        url: 'LoginUser.php',
+                        type: 'POST',
+                        data: formdata,
+                        dataType: "json",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            $('.loader').hide(); 
+                            if (data.success == 1) {
+                                window.location.href = '/content-stc/content_list.php';
+                            } else {
+                                $('#messages').addClass('alert alert-danger').text(data.message);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
                 });
-                input.value = '';
-                return false;
-            }else{
-
-                var reader = new FileReader();
-
-                reader.onload = function(event) {
-                $(placeToInsertImagePreview).html('<div class="borderwrap" data-href="'+event.target.result+'"><div class="filenameupload"><img src="'+event.target.result+'" width="400" height="200"> </div></div>');
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    };
-
-    function fetch_data()  
-    {  
-        
-        $.ajax({  
-            url:"select.php",  
-            method:"GET",  
-            success:function(data){  
-                console.log(data);
-                var html = "";
-                $.each(data, function(index, value) {
-                    if(value.banner){
-                        var banner = 'uploads/'+value.banner;
-                    }else{
-                        var banner = 'uploads/default.png';
-                    }
-                    html += '<tr> <td>'+value.title+'</td> <td>'+value.description+'</td> <td>'+value.link+'</td> <td><img src="'+banner+'" width="150" height="150"></td>  <td>'+value.qr_code+'</td> <td><button type="button" class="btn btn-success EditContent" data-id="'+value.id+'" data-title="'+value.title+'" data-description="'+value.description+'" data-link="'+value.link+'" data-banner="'+banner+'" data-qr_code="'+value.qr_code+'" data-toggle="modal" data-target="#contentModal"> Edit </button>  <button type="button" class="btn btn-danger deleteContent" data-id="'+value.id+'"> Delete </button></td> </tr>'
-                });
-				$('#live_data').html(html);  
-            }  
-        });  
-    }  
-    fetch_data();  
-
-    $(document).on("click", ".EditContent", function() {
-
-        $('.modal-title').text('Edit Content');
-
-        $('#id').val($(this).attr('data-id'));
-        $('#title').val($(this).attr('data-title'));
-        $('#description').val($(this).attr('data-description'));
-        $('#link').val($(this).attr('data-link'));
-        $('#qr_code').val($(this).attr('data-qr_code'));
-        var banner = $(this).attr('data-banner');
-        var html = '<div class="borderwrap"><div class="filenameupload"><img src="'+banner+'" width="400" height="200"> </div>  </div>';
-        $('.prview_img').html(html);
-
-    });
-
-    $(document).on('submit', '#addUpdateContent', function (e) {
-        e.preventDefault();
-        
-        var formdata = new FormData($("#addUpdateContent")[0]);
-        $('.loader').show();
-        $.ajax({
-            url: 'addUpdate.php',
-            type: 'POST',
-            data: formdata,
-            dataType: "json",
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (data) {
-                $('.loader').hide();
-                $('#contentModal').modal('hide');
-                fetch_data();  
-                if (data.success == 1) {
-                    $('#messages').addClass('alert alert-success').text(data.message);
-                } else {
-                    $('#messages').addClass('alert alert-danger').text(data.message);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-            }
-        });
-    });
-
-    $(document).on('click', '.deleteContent', function(){  
-        var id=$(this).attr("data-id");  
-        if(confirm("Are you sure you want to delete this?"))  
-        {  
-            $.ajax({  
-                url:"delete.php",  
-                method:"POST",  
-                data:{id:id},  
-                dataType:"text",  
-                success:function(data){  
-                    fetch_data();  
-                    $('#messages').addClass('alert alert-success').text(data.message);
-                }  
             });  
-        }  
-    });  
-});  
-</script>
+        </script>
 
-</body>  
+    </body>  
 </html>  
