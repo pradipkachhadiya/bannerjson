@@ -9,239 +9,101 @@ session_start();
         <title>User</title>  
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css"> 
-        <style>
-            
-            body {
-                padding-top: 50px;
-            }
-            footer {
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
-            /*
-            * Off Canvas
-            * --------------------------------------------------
-            */
-            @media screen and (max-width: 768px) {
-            .row-offcanvas {
-                position: relative;
-                -webkit-transition: all 0.25s ease-out;
-                -moz-transition: all 0.25s ease-out;
-                transition: all 0.25s ease-out;
-                background:#ecf0f1;
-            }
-
-            .row-offcanvas-left
-            .sidebar-offcanvas {
-                left: -40%;
-            }
-
-            .row-offcanvas-left.active {
-                left: 40%;
-            }
-
-            .sidebar-offcanvas {
-                position: absolute;
-                top: 0;
-                width: 40%;
-                margin-left: 12px;
-            }
-            }
-
-            #sidebar {
-                padding:15px;
-                margin-top:10px;
-            }
-            .nav>.active>a, .nav>.active>a:focus, .nav>.active>a:hover {
-                color: #555;
-                background-color: #e7e7e7;
-            }
-
-            .switch {
-                position: relative;
-                display: inline-block;
-                width: 60px;
-                height: 34px;
-            }
-
-            .switch input { 
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #ccc;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-
-            input:checked + .slider {
-                background-color: #2196F3;
-            }
-
-            input:focus + .slider {
-                box-shadow: 0 0 1px #2196F3;
-            }
-
-            input:checked + .slider:before {
-                -webkit-transform: translateX(26px);
-                -ms-transform: translateX(26px);
-                transform: translateX(26px);
-            }
-
-            /* Rounded sliders */
-            .slider.round {
-                border-radius: 34px;
-            }
-
-            .slider.round:before {
-                border-radius: 50%;
-            }
-        </style>
+        <link rel="stylesheet" href="./css/custom.css"> 
     </head>  
     <body>  
         <input type="hidden" class="token" value="<?php echo md5($_SESSION["email"]) ?>">
-        <div class="navbar navbar-fixed-top navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Content Stc</a>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="logout.php" id="logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <?php include("header.php") ?>
+                    <div class="row" id="main">
 
-        <div class="container-fluid">
-            <div class="row row-offcanvas row-offcanvas-left">
-                <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-                    <div class="sidebar-nav">
-                        <ul class="nav">
-                            <?php if($_SESSION["role"] == 1){ ?>
-                                <li class="active"><a href="#">User</a></li>
-                            <?php } ?>                          
-                            <li><a href="/content_list.php">Content</a></li>
-                        </ul>
-                    </div>
-                </div>
+                        <div class="col-sm-12 col-md-12" id="content">
+                            <br>
+                            <div id="messages"></div>
 
-                <div class="col-xs-12 col-sm-10">
-                    <br>
-                    <div id="messages"></div>
-
-                    <h2> User List </h2>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">
-                    Add User
-                    </button>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Fullname</th>
-                            <th>Email</th>
-                            <th>Profile</th>
-                            <th>Permission</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody id="live_data">
-                        
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="userModalLabel">Add User</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <h2> User List </h2>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">
+                            Add User
                             </button>
-                            </div>
-                            
-                            <form id="addUpdateUser" method="post" enctype="multipart">
-                                <div class="modal-body">       
-                                    <div class="form-group">
-                                        <label for="fullname">Fullname</label>
-                                        <input type="text" class="form-control" id="fullname" placeholder="Enter Fullname" name="fullname" required>
-                                    </div>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Fullname</th>
+                                    <th>Email</th>
+                                    <th>Profile</th>
+                                    <th>Permission</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody id="live_data">
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+                    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="userModalLabel">Add User</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
                                     </div>
+                                    
+                                    <form id="addUpdateUser" method="post" enctype="multipart">
+                                        <div class="modal-body">       
+                                            <div class="form-group">
+                                                <label for="fullname">Fullname</label>
+                                                <input type="text" class="form-control" id="fullname" placeholder="Enter Fullname" name="fullname" required>
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
-                                    </div>
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label for="profile_image">Upload Profile</label>
-                                        <input type="file" class="form-control" id="profile_image" name="profile_image">
-                                        <div class="prview_img">
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="profile_image">Upload Profile</label>
+                                                <input type="file" class="form-control" id="profile_image" name="profile_image">
+                                                <div class="prview_img">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group checkbox_list">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="permission[]" class="permission" id="checkboxAdd" value="Add">Add
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="permission[]" class="permission" id="checkboxUpdate" value="Update">Update
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="permission[]" class="permission" id="checkboxDelete" value="Delete">Delete
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" name="permission[]" class="permission" id="checkboxView" value="View">View
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group checkbox_list">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="permission[]" class="permission" id="checkboxAdd" value="Add">Add
-                                        </label>
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="permission[]" class="permission" id="checkboxUpdate" value="Update">Update
-                                        </label>
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="permission[]" class="permission" id="checkboxDelete" value="Delete">Delete
-                                        </label>
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="permission[]" class="permission" id="checkboxView" value="View">View
-                                        </label>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" class="form-control" id="id" name="id">
+                                            <input type="hidden" class="form-control" id="flag" name="flag" value="1">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <input type="hidden" class="form-control" id="id" name="id">
-                                    <input type="hidden" class="form-control" id="flag" name="flag" value="1">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr>
-            <!-- <footer>
-                <p>© Company 2013</p>
-            </footer> -->
         </div>
 
 

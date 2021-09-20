@@ -24,7 +24,7 @@ if ($method == 'POST') {
         $data['message'] =  "Password is Required";
         echo json_encode($data); die(0);
     }
-    if($email == 'admin@gmail.com'){
+    if($email == 'stc@xunison.com'){
         $sql = "SELECT * FROM tbl_users WHERE email='".$email."' AND password='".$password."'";  
     }else{
         $sql = "SELECT * FROM tbl_users WHERE email='".$email."' AND password='".md5($password)."'";  

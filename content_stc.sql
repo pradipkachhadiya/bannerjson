@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 18, 2021 at 12:27 PM
+-- Generation Time: Sep 20, 2021 at 03:52 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -83,7 +83,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `fullname`, `email`, `password`, `profile_image`, `role`, `permission`, `status`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', 'admin123', '', 1, 'Add,Update,Delete,View', 1, 0, '2021-09-18 04:08:59', '2021-09-18 06:08:34'),
+(1, 'emald', 'stc@xunison.com', 'Stc@086637', '', 1, 'Add,Update,Delete,View', 1, 0, '2021-09-18 04:08:59', '2021-09-18 06:08:34'),
 (2, 'sojitra vaibhavi', 'sojitravaibhavi@gmail.com', '25d55ad283aa400af464c76d713c07ad', '338mario_PNG53.png', 2, 'Add,Delete,View', 1, 0, '2021-09-17 09:00:24', NULL),
 (3, 'test', 'test@gmail.com', '25d55ad283aa400af464c76d713c07ad', '970883216f191c8b4089e8d074073cd6911.jpg', 2, 'Add,Update,View', 0, 0, '2021-09-17 12:19:27', NULL),
 (6, 'test test', 'test123@gmail.com', '25d55ad283aa400af464c76d713c07ad', '', 2, 'Add,Update,View', 1, 1, '2021-09-18 09:46:43', NULL),

@@ -21,6 +21,7 @@
                 align-items: center;
                 justify-content: center;
                 font-family: 'Roboto', sans-serif;
+                background-color: #4f018b;
             }
 
             .card{
@@ -193,7 +194,7 @@
                         success: function (data) {
                             $('.loader').hide(); 
                             if (data.success == 1) {
-                                window.location.href = '/content_list.php';
+                                window.location.href = './dashboard.php';
                             } else {
                                 $('#messages').addClass('alert alert-danger').text(data.message);
                             }

@@ -1,7 +1,7 @@
 <?php
 session_start();
     if(empty($_SESSION["is_login"])){
-        header("location:/");
+        header("location:./");
     }
     if(!empty($_SESSION["permission"])){
         $permission = explode(',',$_SESSION["permission"]);
@@ -12,186 +12,109 @@ session_start();
         <title>Content</title>  
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css"> 
-        <style>
-            body {
-                padding-top: 50px;
-            }
-            footer {
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
-            /*
-            * Off Canvas
-            * --------------------------------------------------
-            */
-            @media screen and (max-width: 768px) {
-            .row-offcanvas {
-                position: relative;
-                -webkit-transition: all 0.25s ease-out;
-                -moz-transition: all 0.25s ease-out;
-                transition: all 0.25s ease-out;
-                background:#ecf0f1;
-            }
-
-            .row-offcanvas-left
-            .sidebar-offcanvas {
-                left: -40%;
-            }
-
-            .row-offcanvas-left.active {
-                left: 40%;
-            }
-
-            .sidebar-offcanvas {
-                position: absolute;
-                top: 0;
-                width: 40%;
-                margin-left: 12px;
-            }
-            }
-
-            #sidebar {
-                padding:15px;
-                margin-top:10px;
-            }
-            .nav>.active>a, .nav>.active>a:focus, .nav>.active>a:hover {
-                color: #555;
-                background-color: #e7e7e7;
-            }
-        </style>
+        <link rel="stylesheet" href="./css/custom.css">
+        
     </head>  
     <body>  
         <input type="hidden" class="token" value="<?php echo md5($_SESSION["email"]) ?>">
         <input type="hidden" class="permission" value="<?php echo $_SESSION["permission"] ?>">
-        <div class="navbar navbar-fixed-top navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Content Stc</a>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="profile.php" id="profile">Profile</a>
-                    </li>
-                    <li>
-                        <a href="logout.php" id="logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <?php include("header.php") ?>
+                    <div class="row" id="main">
 
-        <div class="container-fluid">
-            <div class="row row-offcanvas row-offcanvas-left">
-                <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-                    <div class="sidebar-nav">
-                        <ul class="nav">
-                        <?php if($_SESSION["role"] == 1){ ?>
-                            <li><a href="/users_list.php">User</a></li>
-                        <?php } ?>
-                            <li class="active"><a href="/content_list.php">Content</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <?php if (in_array('View', $permission)){ ?>
-                <div class="col-xs-12 col-sm-10">
-                    <br>
-                    <div id="messages"></div>
-
-                    <h2> Content List </h2>
-                    <?php if (in_array('Add', $permission)){ ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal">
-                    Add Content
-                    </button>
-                    <?php } ?>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Link</th>
-                            <th>Banner</th>
-                            <th>Qr Code</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody id="live_data">
                         
-                        </tbody>
-                    </table>
-                </div>
-            <?php } else { ?>
-                <div class="col-xs-12 col-sm-10">
-                    <h2> You don't have permission to Manage Content</h2>
-                </div>
-            <?php } ?>
-            </div>
+                        <?php if (in_array('View', $permission)){ ?>
+                            <div class="col-sm-12 col-md-12" id="content">
+                            <br>
+                            <div id="messages"></div>
 
-            <div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="contentModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="contentModalLabel">Add Content</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <h2> Content List </h2>
+                            <?php if (in_array('Add', $permission)){ ?>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal">
+                            Add Content
                             </button>
-                            </div>
-                            
-                            <form id="addUpdateContent" method="post" enctype="multipart">
-                                <div class="modal-body">       
-                                    <div class="form-group">
-                                        <label for="title">Title</label>
-                                        <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea class="form-control" id="description" placeholder="Enter Description" name="description" required></textarea>
-                                    </div>
+                            <?php } ?>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Link</th>
+                                    <th>Banner</th>
+                                    <th>Qr Code</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody id="live_data">
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php } else { ?>
+                        <div class="col-xs-12 col-sm-10">
+                            <h2> You don't have permission to Manage Content</h2>
+                        </div>
+                    <?php } ?>
+                    </div>
 
-                                    <div class="form-group">
-                                        <label for="link">Link</label>
-                                        <input type="text" class="form-control" id="link" placeholder="Enter Link" name="link">
+                    <div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="contentModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="contentModalLabel">Add Content</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
                                     </div>
+                                    
+                                    <form id="addUpdateContent" method="post" enctype="multipart">
+                                        <div class="modal-body">       
+                                            <div class="form-group">
+                                                <label for="title">Title</label>
+                                                <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea class="form-control" id="description" placeholder="Enter Description" name="description" required></textarea>
+                                            </div>
 
-                                    <div class="form-group">
-                                        <label for="banner">Upload Banner</label>
-                                        <input type="file" class="form-control" id="banner" name="banner">
-                                        <div class="prview_img">
+                                            <div class="form-group">
+                                                <label for="link">Link</label>
+                                                <input type="text" class="form-control" id="link" placeholder="Enter Link" name="link">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="banner">Upload Banner</label>
+                                                <input type="file" class="form-control" id="banner" name="banner">
+                                                <div class="prview_img">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qr_code">Qr Code</label>
+                                                <input type="text" class="form-control" id="qr_code" placeholder="Enter Qr Code" name="qr_code">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="status" class="status" value="1" checked>Publish
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="status" class="status" value="2">Draft
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="qr_code">Qr Code</label>
-                                        <input type="text" class="form-control" id="qr_code" placeholder="Enter Qr Code" name="qr_code">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="status" class="status" value="1" checked>Publish
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="status" class="status" value="2">Draft
-                                        </label>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" class="form-control" id="id" name="id">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <input type="hidden" class="form-control" id="id" name="id">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr>
-            <!-- <footer>
-                <p>© Company 2013</p>
-            </footer> -->
         </div>
 
 
