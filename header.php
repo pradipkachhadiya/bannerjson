@@ -17,11 +17,13 @@
                 <!-- Top Menu Items -->
                 <ul class="nav navbar-right top-nav">
                     <li class="pt-5">
+                        <div id="messages1"></div>
                         <button type="button" id="publishAPI" class="btn btn-white">
                             Publish
                         </button>
                     </li>          
                     <li>
+                        
                         <a href="profile.php" id="profile">Profile</a>
                     </li>          
                     <li class="dropdown">
