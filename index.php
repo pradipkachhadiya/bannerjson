@@ -193,7 +193,7 @@
                         success: function (data) {
                             $('.loader').hide(); 
                             if (data.success == 1) {
-                                window.location.href = '/content-stc/content_list.php';
+                                window.location.href = '/content_list.php';
                             } else {
                                 $('#messages').addClass('alert alert-danger').text(data.message);
                             }

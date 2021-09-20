@@ -1,7 +1,7 @@
 <?php
 session_start();
     if(empty($_SESSION["is_login"])){
-        header("location:/content-stc/");
+        header("location:/");
     }
     if(!empty($_SESSION["permission"])){
         $permission = explode(',',$_SESSION["permission"]);
@@ -91,9 +91,9 @@ session_start();
                     <div class="sidebar-nav">
                         <ul class="nav">
                         <?php if($_SESSION["role"] == 1){ ?>
-                            <li><a href="/content-stc/users_list.php">User</a></li>
+                            <li><a href="/users_list.php">User</a></li>
                         <?php } ?>
-                            <li class="active"><a href="/content-stc/content_list.php">Content</a></li>
+                            <li class="active"><a href="/content_list.php">Content</a></li>
                         </ul>
                     </div>
                 </div>

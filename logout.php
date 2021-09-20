@@ -4,6 +4,6 @@ session_start();
 include("connection.php");
 
 session_destroy();
-header("location:/content-stc/");
+header("location:/");
 
 ?>

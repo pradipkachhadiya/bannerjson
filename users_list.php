@@ -1,7 +1,7 @@
 <?php
 session_start();
     if(empty($_SESSION["is_login"])){
-        header("location:/content-stc/");
+        header("location:/");
     }
 ?>
 <html>  
@@ -147,7 +147,7 @@ session_start();
                             <?php if($_SESSION["role"] == 1){ ?>
                                 <li class="active"><a href="#">User</a></li>
                             <?php } ?>                          
-                            <li><a href="/content-stc/content_list.php">Content</a></li>
+                            <li><a href="/content_list.php">Content</a></li>
                         </ul>
                     </div>
                 </div>
