@@ -1,5 +1,5 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "","content_stc"); 
+include("connection.php");
 session_start();
     if(empty($_SESSION["is_login"])){
         header("location:./");

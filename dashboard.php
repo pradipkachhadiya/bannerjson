@@ -4,12 +4,7 @@ session_start();
         header("location:./");
     }
 
-    $connect = mysqli_connect("localhost", "root", "","content_stc"); 
-
-
-    if ($connect->connect_error) {
-        die("Connection failed: " . $connect->connect_error);
-    }
+    include("connection.php");
     
     $sql = "SELECT * FROM tbl_users WHERE is_deleted=0";  
     $result = mysqli_query($connect, $sql) or die (mysqli_error($connect));;
