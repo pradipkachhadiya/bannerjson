@@ -1,10 +1,11 @@
 <?php
+include("connection.php");
 session_start();
 if (empty($_SESSION["is_login"])) {
     header("location:./");
 }
 
-$connect = mysqli_connect("localhost", "root", "vktCcPUTLaCxiqVPmvLw","content_stc"); 
+
 $sql = "SELECT * FROM tbl_users WHERE is_deleted=0";
 $result = mysqli_query($connect, $sql) or die(mysqli_error($connect));;
 $total_users = $result->num_rows;
