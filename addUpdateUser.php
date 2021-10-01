@@ -5,7 +5,7 @@
 include("connection.php");
 
 $headers = apache_request_headers();
-$headers = apache_request_headers();
+
 if(!empty($headers)){
      $token = $headers['token'];
      if(empty($token)){
@@ -57,7 +57,8 @@ if ($method == 'POST') {
     $tempname = $_FILES["profile_image"]["tmp_name"];    
 
     if(isset($_FILES["profile_image"]) && $_FILES["profile_image"]['size'] > 0 ) {
-        $profile_image = rand(111,999).basename($_FILES["profile_image"]["name"]);
+        $filename = str_replace(' ','_',$_FILES["profile_image"]["name"]);
+        $profile_image = rand(111,999).basename($filename);
         move_uploaded_file($tempname, 'uploads/'. $profile_image);
         
     }

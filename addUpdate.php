@@ -57,7 +57,8 @@ if ($method == 'POST') {
     $tempname = $_FILES["banner"]["tmp_name"];    
 
     if(isset($_FILES["banner"]) && $_FILES["banner"]['size'] > 0 ) {
-        $banner = rand(111,999).basename($_FILES["banner"]["name"]);
+        $filename = str_replace(' ','_',$_FILES["banner"]["name"]);
+        $banner = rand(111,999).basename($filename);
         move_uploaded_file($tempname, 'uploads/'. $banner );
     }
 

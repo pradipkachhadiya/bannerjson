@@ -165,7 +165,7 @@ session_start();
                         var html = "";
                         $.each(data, function(index, value) {
                             if(value.profile_image){
-                                var profile_image = 'uploads/'+value.profile_image;
+                                var profile_image = value.profile_image;
                             }else{
                                 var profile_image = 'uploads/default.png';
                             }

@@ -25,7 +25,7 @@ if(!empty($headers)){
                     $data[$i]['id'] = $row["id"];
                     $data[$i]['fullname'] = $row["fullname"];
                     $data[$i]['email'] = $row["email"];
-                    $data[$i]['profile_image'] = $row["profile_image"];
+                    $data[$i]['profile_image'] = BASE_URL.'uploads/'.$row["profile_image"];
                     $data[$i]['permission'] = $row["permission"];
                     $data[$i]['status'] = $row["status"];
                     $i++;
@@ -43,7 +43,7 @@ if(!empty($headers)){
                          $data['id'] = $row["id"];
                          $data['fullname'] = $row["fullname"];
                          $data['email'] = $row["email"];
-                         $data['profile_image'] = $row["profile_image"];
+                         $data['profile_image'] = BASE_URL.'uploads/'.$row["profile_image"];
                          $data['permission'] = $row["permission"];
                          $data['status'] = $row["status"];
                     }

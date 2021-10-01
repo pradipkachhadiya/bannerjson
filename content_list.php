@@ -177,7 +177,7 @@ session_start();
                         var html = "";
                         $.each(data, function(index, value) {
                             if(value.banner){
-                                var banner = 'uploads/'+value.banner;
+                                var banner = value.banner;
                             }else{
                                 var banner = 'uploads/default.png';
                             }
